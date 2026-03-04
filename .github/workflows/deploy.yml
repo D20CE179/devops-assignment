@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - [cite_start]main  # Enforces GitHub flow for production-ready code [cite: 41, 42]
+      - main  # Enforces GitHub flow for production-ready code
 
 jobs:
   build-test-deploy:
@@ -22,7 +22,7 @@ jobs:
         run: mvn clean package
         working-directory: app/sample-spring-boot-app
 
-      # The pipeline will "fail-fast" here if the unit tests fail [cite: 62]
+      # The pipeline will "fail-fast" here if the unit tests fail
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -45,7 +45,7 @@ jobs:
           echo "$KUBECONFIG_DATA" | base64 -d > kubeconfig
           export KUBECONFIG=kubeconfig
           
-          # Deploying to the Dev environment [cite: 58]
+          # Deploying to the Dev environment
           # Note: In a local test without a remote cluster, this step acts as a placeholder 
           # to demonstrate the exact commands you would run.
           echo "Executing: kubectl apply -f k8s/dev/"
